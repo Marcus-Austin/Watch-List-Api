@@ -1,16 +1,20 @@
 import express from 'express';
-import {config} from 'dotenv';
 import {connectDB, disconnectDB} from './config/db.js';
 //import routes
 import movieRoutes from './routes/movieRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-config();
 connectDB();
+
+//body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //api routes
 app.use('/movies', movieRoutes);
+app.use('/auth', authRoutes);
 
 app.get("/hello",(req,res)=>{
   res.json({message:"Hello World!"});
