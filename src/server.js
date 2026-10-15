@@ -1,30 +1,28 @@
-import express from 'express';
-import {connectDB, disconnectDB} from './config/db.js';
-//import routes
-import movieRoutes from './routes/movieRoutes.js';
-import authRoutes from './routes/authRoutes.js';
-import watchlistRoutes from './routes/watchlistRoutes.js';
+import express from "express";
+import { config } from "dotenv";
+import { connectDB, disconnectDB } from "./config/db.js";
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// Import Routes
+import movieRoutes from "./routes/movieRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import watchlistRoutes from "./routes/watchlistRoutes.js";
+
+config();
 connectDB();
 
-//body parser middleware
+const app = express();
+
+// Body parsing middlwares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//api routes
-app.use('/movies', movieRoutes);
-app.use('/auth', authRoutes);
-app.use('/watchlist', watchlistRoutes);
+// API Routes
+app.use("/movies", movieRoutes);
+app.use("/auth", authRoutes);
+app.use("/watchlist", watchlistRoutes);
 
-
-app.get("/hello",(req,res)=>{
-  res.json({message:"Hello World!"});
-});
-
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = app.listen(process.env.PORT || 5001, "0.0.0.0", () => {
+  console.log(`Server running on PORT ${process.env.PORT}`);
 });
 
 // Handle unhandled promise rejections (e.g., database connection errors)

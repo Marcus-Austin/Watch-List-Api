@@ -1,23 +1,21 @@
-import express from 'express';
+import express from "express";
 
 const router = express.Router();
 
-router.get('/',(req,res)=>{
-    res.json({httpMethod:"GET", message:"Hello World!"});
+router.get("/", (req, res) => {
+  res.json({ httpMethod: "get" });
 });
 
-router.post('/',(req,res)=>{
-    res.json({httpMethod:"POST", message:"Hello World!"});
+router.post("/", (req, res) => {
+  res.json({ httpMethod: "post" });
 });
 
-router.put('/',(req,res)=>{
-    res.json({httpMethod:"PUT", message:"Hello World!"});
+router.put("/", (req, res) => {
+  res.json({ httpMethod: "put" });
 });
 
-router.delete('/',(req,res)=>{
-    res.json({httpMethod:"DELETE", message:"Hello World!"});
+router.delete("/", (req, res) => {
+  res.json({ httpMethod: "delete" });
 });
-
-
 
 export default router;
